@@ -37,12 +37,11 @@ Things you may want to cover:
 | last_name         | string  | null: false |
 | first_name_kana   | string  | null: false |
 | last_name_kana    | string  | null: false |
-| birth_day         | integer | null: false |プルダウン
+| birth_day         | date    | null: false |プルダウン
 ### Association
 
 - has_many :items
 - has_many :purchase_records
-- has_many :addresses 
 
 
 
@@ -51,15 +50,16 @@ Things you may want to cover:
 
 | Column             | Type       | Options           |
 | ------------------ | ---------- | -----------       |
-| item_name          | string     | null: false       |40まで
-| item_inf           | text       | null: false       |1000まで
-| item_category      | string     | null: false       |プルダウン
-| item_condition     | string     | null: false       |プルダウン
-| delivery_fee       | string     | null: false       |プルダウン
-| ship_from_location | string     | null: false       |プルダウン
-| delivery_start     | string     | null: false       |プルダウン
+| name               | string     | null: false       |40まで
+| information        | text       | null: false       |1000まで
+| category           | integer    | null: false       |プルダウン
+| condition          | integer    | null: false       |プルダウン
+| delivery_fee       | integer    | null: false       |プルダウン
+| ship_from_location | integer    | null: false       |プルダウン
+| delivery_start     | integer    | null: false       |プルダウン
 | price              | integer    | null: false       |¥300〜9,999,999
-| user_id            | references | foreign_key: true |
+| user               | references | foreign_key: true |
+
 
 
 ### Association
@@ -76,9 +76,9 @@ Things you may want to cover:
 
 | Column      | Type       | Options           |
 | ----------- | ---------- | ----------------- |
-| user_id     | references | foreign_key: true |
-| item_id     | references | foreign_key: true |
-| address_id  | references | foreign_key: true |
+| user        | references | foreign_key: true |
+| item        | references | foreign_key: true |
+| address     | references | foreign_key: true |
 
 ### Association
 
@@ -94,16 +94,14 @@ Things you may want to cover:
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| post_code          | integer    | null: false,                   |
+| post_code          | string     | null: false,                   |
 | prefecture         | string     | null: false,                   |プルダウン
 | city               | string     | null: false,                   |
 | block              | string     | null: false,                   |
 | building           | string     |                                |
-| phone_number       | integer    | null: false,                   |
-| user_id            | references | foreign_key: true              |
-| purchase_record_id | references | foreign_key: true              |
+| phone_number       | string     | null: false,                   |
+| purchase_record    | references | foreign_key: true              |
 
 ### Association
 
 - belongs_to :purchase_record
-- belongs_to :user 
