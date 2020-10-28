@@ -3,15 +3,9 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-  describe 'ユーザー新規登録/ユーザー情報' do
+  describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
-      it "nicknameとemail、passwordとpassword_confirmation が存在すれば登録できる" do
-        expect(@user).to be_valid
-      end
-      # emailの@があるときに登録できるは、上記の存在登録と下記の@ないときに登録できない反証で記入必要ないと判断
-      it "passwordが6文字以上かつ英数字混合かつpassword_confirmation と一致であればであれば登録できる" do
-        @user.password = "000aaa"
-        @user.password_confirmation = "000aaa"
+      it "nicknameとemail、passwordとpassword_confirmation、first_name、last_name、first_name_kana、last_name_kana、birth_day が存在し条件を満たせば登録できる" do
         expect(@user).to be_valid
       end
     end
@@ -54,6 +48,11 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end
+      it "password半角英数字混合でないと登録できない" do
+        @user.password = "11111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
       it "passwordが存在してもpassword_confirmationが空では登録できない" do
         @user.password_confirmation = ""
         @user.valid?
@@ -64,30 +63,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end 
-    end
-  end
-  describe 'ユーザー新規登録/本人情報確認' do
-    context '新規登録がうまくいくとき' do
-      it "first_name、last_name、first_name_kana、last_name_kana、birth_day が存在すれば登録できる" do
-        expect(@user).to be_valid
-      end
-      it "first_name、last_name、が全角であれば登録できる" do
-        @user.first_name = "森"
-        @user.last_name = "川"
-        expect(@user).to be_valid
-      end
-      it "first_name_kana、last_name_kanaが全角であれば登録できる" do
-        @user.first_name_kana = "モリ"
-        @user.first_name_kana = "カワ"
-        expect(@user).to be_valid
-      end
-      it "birth_dayが選択されていれば登録できる" do
-        @user.birth_day = "1930-01-01"
-        expect(@user).to be_valid
-      end
-      
-    end
-    context '新規登録がうまくいかないとき' do
       it "first_nameが空だと登録できない" do
         @user.first_name = ""
         @user.valid?
