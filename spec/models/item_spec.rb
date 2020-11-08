@@ -56,27 +56,27 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid")
       end
-      it "priceが300~9,999,999の範囲外だと登録できない" do
+      it "priceが300~9,999,999の範囲外(300未満)だと登録できない" do
         @item.price = "299"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
-      it "priceが300~9,999,999の範囲外だと登録できない" do
+      it "priceが300~9,999,999の範囲外(10,000,000以上)だと登録できない" do
         @item.price = "10000000"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
-      it "priceが全角数字だと登録できない" do
+      it "priceが半角数字以外(全角数字)だと登録できない" do
         @item.price = "３００"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
-      it "priceが全角文字だと登録できない" do
+      it "priceが半角数字以外(全角文字)だと登録できない" do
         @item.price = "文字"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
-      it "priceが半角文字だと登録できない" do
+      it "priceが半角数字以外(半角文字)だと登録できない" do
         @item.price = "aaa"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
