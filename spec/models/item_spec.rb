@@ -27,27 +27,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Information can't be blank")
       end
       it 'category_idが0だと登録できない' do
-        @item.category_id = '0'
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 0')
       end
       it 'condition_idが0だと登録できない' do
-        @item.condition_id = '0'
+        @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be other than 0')
       end
       it 'delivery_fee_idが0だと登録できない' do
-        @item.delivery_fee_id = '0'
+        @item.delivery_fee_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery fee must be other than 0')
       end
       it 'ship_from_location_idが0だと登録できない' do
-        @item.ship_from_location_id = '0'
+        @item.ship_from_location_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Ship from location must be other than 0')
       end
       it 'delivery_start_idが0だと登録できない' do
-        @item.delivery_start_id = '0'
+        @item.delivery_start_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery start must be other than 0')
       end
@@ -57,17 +57,17 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price is invalid')
       end
       it 'priceが300~9,999,999の範囲外(300未満)だと登録できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが300~9,999,999の範囲外(10,000,000以上)だと登録できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'priceが半角数字以外(全角数字)だと登録できない' do
-        @item.price = '３００'
+        @item.price = ３００
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
