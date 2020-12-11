@@ -1,15 +1,15 @@
 class OrdersController < ApplicationController
-	
+	before_action :authenticate_user!, only: [:index]
   def index
-    redirect_to root_path unless user_signed_in?
     @item = Item.find(params[:item_id])
-    if Order.exists?(params[:item_id])
+		if @item.order != nil
       redirect_to root_path
     elsif current_user.id == @item.user_id
       redirect_to root_path
     else
       @item_order = ItemOrder.new
-    end
+		end
+		
   end
 
   def new
