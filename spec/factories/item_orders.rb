@@ -1,5 +1,8 @@
 FactoryBot.define do
   factory :item_order do
+    user_id { 1 }
+    item_id { 1 }
+    token { 'tok_abcdefghijk00000000000000000' }
     # number {1234123412341234}
     # exp_month {12}
     # exp_year {22}
@@ -10,7 +13,5 @@ FactoryBot.define do
     block { '1-1' }
     building { 'TECHハイツ' }
     phone_number { '09012341234' }
-    user_id { 1 }
-    item_id { 1 }
   end
 end

@@ -1,9 +1,9 @@
 class ItemOrder
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :ship_from_location_id, :city, :block, :building, :phone_number
-
-  with_options presence: true do 
+  attr_accessor :user_id, :item_id, :token, :post_code, :ship_from_location_id, :city, :block, :building, :phone_number
+  with_options presence: true do
     validates :user_id, :item_id
+    validates :token
     validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: '郵便番号は、ハイフン半角(-)を入れて半角数字７桁で入力してください' }
     validates :block
     validates :city,         format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '市町村は、全角文字を使用してください' }

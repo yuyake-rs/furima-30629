@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   before_action :destroy_item, only: [:destroy]
   def index
     @items = Item.includes(:user).order('created_at DESC')
+    
   end
 
   def new
