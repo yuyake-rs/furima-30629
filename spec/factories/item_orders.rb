@@ -3,10 +3,6 @@ FactoryBot.define do
     user_id { 1 }
     item_id { 1 }
     token { 'tok_abcdefghijk00000000000000000' }
-    # number {1234123412341234}
-    # exp_month {12}
-    # exp_year {22}
-    # cvc {123}
     post_code { '111-1111' }
     ship_from_location_id { 1 }
     city { '渋谷区' }

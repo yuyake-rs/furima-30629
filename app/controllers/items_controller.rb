@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   before_action :destroy_item, only: [:destroy]
   def index
     @items = Item.includes(:user).order('created_at DESC')
-    
   end
 
   def new
@@ -24,7 +23,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user == @item.user
+    @item = Item.find(params[:id])
+    if !@item.order.nil?
+      redirect_to root_path
+    elsif current_user != @item.user
+      redirect_to new_user_session_path
+    end
   end
 
   def update
