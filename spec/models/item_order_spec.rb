@@ -18,6 +18,17 @@ RSpec.describe ItemOrder, type: :model do
       expect(@item_order).to be_valid
     end
 
+    it 'user_idが空では登録できないこと' do
+      @item_order.user_id = nil
+      @item_order.valid?
+      expect(@item_order.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空では登録できないこと' do
+      @item_order.item_id = nil
+      @item_order.valid?
+      expect(@item_order.errors.full_messages).to include("Item can't be blank")
+    end
+
     it 'tokenが空では登録できないこと' do
       @item_order.token = nil
       @item_order.valid?
