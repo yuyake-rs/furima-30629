@@ -13,6 +13,11 @@ RSpec.describe ItemOrder, type: :model do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@item_order).to be_valid
     end
+    it '建物名が抜けていても保存できること' do
+      @item_order.building = nil
+      expect(@item_order).to be_valid
+    end
+
     it 'tokenが空では登録できないこと' do
       @item_order.token = nil
       @item_order.valid?
@@ -28,8 +33,8 @@ RSpec.describe ItemOrder, type: :model do
       @item_order.valid?
       expect(@item_order.errors.full_messages).to include('Post code 郵便番号は、ハイフン半角(-)を入れて半角数字７桁で入力してください')
     end
-    it 'ship_from_location_idが空だと保存できない' do
-      @item_order.ship_from_location_id = nil
+    it 'ship_from_location_idが0以外でないと保存できない' do
+      @item_order.ship_from_location_id = 0
       @item_order.valid?
       expect(@item_order.errors.full_messages).to include('Ship from location 都道府県を選択してください')
     end
