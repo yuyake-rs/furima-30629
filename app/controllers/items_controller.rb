@@ -23,11 +23,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
-    if !@item.order.nil?
+    if !@item.order.nil? || current_user != @item.user
       redirect_to root_path
-    elsif current_user != @item.user
-      redirect_to new_user_session_path
     end
   end
 
