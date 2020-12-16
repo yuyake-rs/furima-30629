@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe ItemOrder, type: :model do
   describe '購入情報の保存' do
     before do
-      @item_order = FactoryBot.build(:item_order)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      user_2 = FactoryBot.create(:user)
+      @item_order = FactoryBot.build(:item_order, user_id: user_2.id, item_id: item.id)
+      sleep(1)
     end
 
     it 'すべての値が正しく入力されていれば保存できること' do
