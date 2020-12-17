@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :set_items, only: [:index, :create, :pay_item]
+  before_action :set_items, only: [:index, :create]
   def index
     if !@item.order.nil? || current_user.id == @item.user_id
       redirect_to root_path
