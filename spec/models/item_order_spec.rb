@@ -66,7 +66,7 @@ RSpec.describe ItemOrder, type: :model do
         expect(@item_order.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberは11桁以内でないと保存できない' do
-        @item_order.phone_number = '000111000222000'
+        @item_order.phone_number = '000111000222'
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include('Phone number 電話番号は、11桁以内で入力してください')
       end
